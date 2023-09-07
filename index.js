@@ -18,6 +18,7 @@ const debug = debugFactory("semantic-release:commit-analyzer");
  * @param {String} pluginConfig.preset conventional-changelog preset ('angular', 'atom', 'codemirror', 'ember', 'eslint', 'express', 'jquery', 'jscs', 'jshint')
  * @param {String} pluginConfig.config Requireable npm package with a custom conventional-changelog preset
  * @param {String|Array} pluginConfig.releaseRules A `String` to load an external module or an `Array` of rules.
+ * @param {bool} pluginConfig.ignoreDefaultRules A `String` to load an external module or an `Array` of rules.
  * @param {Object} pluginConfig.parserOpts Additional `conventional-changelog-parser` options that will overwrite ones loaded by `preset` or `config`.
  * @param {Object} context The semantic-release context.
  * @param {Array<Object>} context.commits The commits to analyze.
@@ -53,7 +54,7 @@ export async function analyzeCommits(pluginConfig, context) {
     }
 
     // If no custom releaseRules or none matched the commit, try with default releaseRules
-    if (isUndefined(commitReleaseType)) {
+    if (isUndefined(commitReleaseType) && !pluginConfig.ignoreDefaultRules) {
       debug("Analyzing with default rules");
       commitReleaseType = analyzeCommit(DEFAULT_RELEASE_RULES, commit);
     }

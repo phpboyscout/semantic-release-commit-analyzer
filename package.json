@@ -1,6 +1,6 @@
 {
-  "name": "@semantic-release/commit-analyzer",
-  "description": "semantic-release plugin to analyze commits with conventional-changelog",
+  "name": "@phpboyscout/semantic-release-commit-analyzer",
+  "description": "a modified version of @semantic-release/commit-analyzer to allos finer frained control over defaults",
   "version": "0.0.0-development",
   "type": "module",
   "author": "Pierre Vanduynslager (https://twitter.com/@pvdlg_)",
@@ -10,7 +10,7 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/semantic-release/commit-analyzer/issues"
+    "url": "https://github.com/phpboyscout/semantic-release-commit-analyzer/issues"
   },
   "contributors": [
     "Stephan Bönnemann <stephan@boennemann.me> (http://boennemann.me)",
@@ -45,7 +45,7 @@
     "lib",
     "index.js"
   ],
-  "homepage": "https://github.com/semantic-release/commit-analyzer#readme",
+  "homepage": "https://github.com/phpboyscout/semantic-release-commit-analyzer#readme",
   "keywords": [
     "changelog",
     "commit-analyzer",
@@ -78,8 +78,7 @@
     "trailingComma": "es5"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "repository": {
     "type": "git",

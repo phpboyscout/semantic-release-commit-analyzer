@@ -24,20 +24,23 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 {
   "plugins": [
     [
-      "@semantic-release/commit-analyzer",
+      "@phpboyscout/semantic-releasecommit-analyzer",
       {
         "preset": "angular",
         "releaseRules": [
-          { "type": "docs", "scope": "README", "release": "patch" },
-          { "type": "refactor", "release": "patch" },
-          { "type": "style", "release": "patch" }
+          { "scope": "networking", "breaking": true, "release": "major" },
+          { "scope": "networking", "type": "feat", "release": "minor" },
+          { "scope": "networking", "release": "patch" }
         ],
+        "ignoreDefaultRules": true,
         "parserOpts": {
           "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
         }
       }
     ],
-    "@semantic-release/release-notes-generator"
+    ["@phpboyscout/scoped-release-notes-generator", { 
+      "scope": "networking"
+    }
   ]
 }
 ```
@@ -61,6 +64,7 @@ With this example:
 | `config`       | npm package name of a custom [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) preset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | -                                                                                                                                 |
 | `parserOpts`   | Additional [conventional-commits-parser](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#conventionalcommitsparseroptions) options that will extends the ones loaded by `preset` or `config`. This is convenient to use a [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) preset with some customizations without having to create a new module.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | -                                                                                                                                 |
 | `releaseRules` | An external module, a path to a module or an `Array` of rules. See [`releaseRules`](#releaserules).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | See [`releaseRules`](#releaserules)                                                                                               |
+| `ignoreDefaultRules` | disable the default releaseRules. See [`releaseRules`](#releaserules).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | See [`releaseRules`](#releaserules)                                                                                               |
 | `presetConfig` | Additional configuration passed to the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) preset. Used for example with [conventional-changelog-conventionalcommits](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.0.0/README.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | -                                                                                                                                 |
 
 **Notes**: in order to use a `preset` it must be installed (for example to use the [eslint preset](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint) you must install it with `npm install conventional-changelog-eslint -D`)
@@ -83,18 +87,19 @@ This is an `Array` of rule objects. A rule object has a `release` property and 1
 {
   "plugins": [
     [
-      "@semantic-release/commit-analyzer",
+      "@phpboyscout/semantic-release-commit-analyzer",
       {
         "preset": "angular",
         "releaseRules": [
-          { "type": "docs", "scope": "README", "release": "patch" },
-          { "type": "refactor", "scope": "core-*", "release": "minor" },
-          { "type": "refactor", "release": "patch" },
-          { "scope": "no-release", "release": false }
+          { "scope": "networking", "breaking": true, "release": "major" },
+          { "scope": "networking", "type": "feat", "release": "minor" },
+          { "scope": "networking", "release": "patch" }
+        ],
+        "ignoreDefaultRules": true,
         ]
       }
     ],
-    "@semantic-release/release-notes-generator"
+    []"@phpboyscout/scoped-release-notes-generator", {"scope": "frontend"}]
   ]
 }
 ```
